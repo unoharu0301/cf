@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home2', [ReservationController::class, 'home2']);
+
+Route::middleware('auth')->group(function () {
+    Route::get('/', [ReservationController::class, 'home']);
+    
+    Route::get('/home1', [ReservationController::class, 'home1']);
+    Route::get('/mypage', [ReservationController::class, 'mypage']);
+    Route::get('/detail/{shopid}', [ReservationController::class, 'detail']);
+    Route::post('/reservation', [ReservationController::class, 'reservation']);
 });
+
